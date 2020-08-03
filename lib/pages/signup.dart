@@ -1,3 +1,4 @@
+import 'package:feedly/pages/feed.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -48,6 +49,9 @@ class _SignUpPageState extends State<SignUpPage> {
           content: Text("Registration Successfull"),
         ),
       );
+      Navigator.push(context, MaterialPageRoute(builder: (ctx) {
+        return FeedPage();
+      }));
     } catch (ex) {
       _scaffold.currentState.removeCurrentSnackBar();
       _scaffold.currentState.showSnackBar(
