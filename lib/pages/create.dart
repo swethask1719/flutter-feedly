@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,9 +24,10 @@ class _CreatePageState extends State<CreatePage> {
           .showSnackBar(SnackBar(content: Text("Please enter some text")));
       return;
     }
+    DocumentReference ref;
 
     try {
-      await _firestore.collection("posts").add({
+      ref = await _firestore.collection("posts").add({
         "text": _postc.text.trim(),
         "owner-name": user_displayname,
         "owner": user_uid,
@@ -35,6 +36,18 @@ class _CreatePageState extends State<CreatePage> {
         "likes_count": 0,
         "comments_count": 0,
       });
+
+      if (_image != null) {
+        _scaffold.currentState.removeCurrentSnackBar();
+        _scaffold.currentState
+            .showSnackBar(SnackBar(content: Text("Uploading image ...")));
+
+        String _url = await _upload(ref.documentID, _image);
+        await ref.updateData({
+          "image": _url,
+        });
+      }
+      _scaffold.currentState.removeCurrentSnackBar();
       _scaffold.currentState
           .showSnackBar(SnackBar(content: Text("Post created successfully")));
       Future.delayed(Duration(seconds: 1), () {
@@ -87,6 +100,19 @@ class _CreatePageState extends State<CreatePage> {
             ],
           );
         });
+  }
+
+  Future<String> _upload(String filename, File file) async {
+    FirebaseStorage _storage = FirebaseStorage.instance;
+    StorageUploadTask _task = _storage
+        .ref()
+        .child(filename)
+        .putFile(file, StorageMetadata(contentType: 'image/png'));
+
+    final String _downloadurl =
+        await (await _task.onComplete).ref.getDownloadURL();
+
+    return _downloadurl;
   }
 
   @override
