@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "998692727474",
+    "firebase_url": "https://feedlyflutter-5a266.firebaseio.com",
+    "project_id": "feedlyflutter-5a266",
+    "storage_bucket": "feedlyflutter-5a266.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998692727474:android:15dce32600c680910a77ab",
+        "android_client_info": {
+          "package_name": "com.example.feedly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "998692727474-fl5taanmoo2sfsusk5dfaaegpen595ug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1pHToJk4WRB1Of8vUD7jKA46lBHfadio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "998692727474-fl5taanmoo2sfsusk5dfaaegpen595ug.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
